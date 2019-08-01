@@ -40,7 +40,24 @@ Cell.prototype.show = function () {
 
 Cell.prototype.reveals = function () {
     this.reveal = true;
+    if (this.amtCrabs == 0) {
+        for (let xoff = -1; xoff <= 1; xoff++) {
+            for (let yoff = -1; yoff <= 1; yoff++) {
+                let i = this.i + xoff;
+                let j = this.j + yoff;
+                if ((i > -1 && i < cols && j > -1 && j < rows)) {
+                    let neigh = grid[i][j];
+                    if (neigh.reveal == false) {
+                        neigh.reveals();
+                    }
+                }
+            }
+        }
+    } else if (this.crab) {
+        lose();
+    }
 }
+
 
 Cell.prototype.click = function (x, y) {
     return (x > this.x && x < this.x + this.l && y > this.y && y < this.y + this.l);
@@ -64,7 +81,4 @@ Cell.prototype.countCrabs = function () {
         }
     }
     this.amtCrabs = crabs;
-
 }
-
-

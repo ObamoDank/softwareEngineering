@@ -38,7 +38,7 @@ function setup() {
         options.splice(index, 1);
         grid[i][j].crab = true;
     }
-    
+
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < cols; j++) {
             grid[i][j].countCrabs();
@@ -52,6 +52,17 @@ function mousePressed() {
         for (let j = 0; j < rows; j++) {
             if (grid[i][j].click(mouseX, mouseY)) {
                 grid[i][j].reveals();
+            }
+        }
+    }
+}
+
+function lose() {
+    for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+            let cc = grid[i][j];
+            if (cc.reveal == false && cc.crab) {
+                cc.reveal = true;
             }
         }
     }
