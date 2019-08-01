@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>50</y>
+      <w>150</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Page
+--
+-name: String
+-grid: array
+--
+populateGrid()
+displayHUD()
+navigate()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>300</y>
+      <w>150</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Cell
+--
+-gridI: int
+-gridJ: int
+-x: int
+-y: int
+-stateR: bool
+-stateB: bool
+-amtBombs: int
+--
+displayCell()
+reveal()
+choose()
+countCrabs()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>300</y>
+      <w>150</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Bomb
+--
+
+--
+endGame()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>400</y>
+      <w>220</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>180</y>
+      <w>80</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..1
+m2=0..*
+displays</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+</diagram>
