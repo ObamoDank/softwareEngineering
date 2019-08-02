@@ -1,18 +1,25 @@
 let crabcrab;
+let treetree;
+let wavewave;
 
 function preload() {
     crabcrab = loadImage('crab.png');
+    treetree = loadImage('tree.png');
+    wavewave = loadImage('wave.png');
 }
 
 function Cell(i, j, l) {
     this.img = crabcrab;
+    this.tree = treetree;
+    this.wave = wavewave;
     this.i = i;
     this.j = j;
-    this.x = i * l;
-    this.y = j * l;
+    this.x = (i * l) + 20;
+    this.y = (j * l) + 90;
     this.l = l;
     this.crab = false
     this.reveal = false;
+    this.flagged = false;
     this.amtCrabs;
 }
 
@@ -20,6 +27,14 @@ Cell.prototype.show = function () {
     fill('#1034a6');
     stroke('#f05e23');
     rect(this.x, this.y, this.l, this.l);
+    image(this.wave, this.x, this.y, this.l, this.l);
+
+    if (this.flagged){
+        fill('#1034a6');
+        rect(this.x, this.y, this.l, this.l);
+        image(this.tree, this.x, this.y, this.l, this.l);
+
+    }
     if (this.reveal) {
         if (this.crab) {
             fill('#3fe0d0');
@@ -39,9 +54,23 @@ Cell.prototype.show = function () {
 }
 
 Cell.prototype.reveals = function () {
-    this.reveal = true;
+    if(!gg){
+                if (!this.reveal){
+            revealCount++;
+        }
+        this.reveal = true;
     if (this.amtCrabs == 0) {
-        for (let xoff = -1; xoff <= 1; xoff++) {
+        this.chain();
+    } else if (this.crab) {
+        lose();
+    } else if (revealCount + allCrabs == 100){
+        win();
+    }
+    }
+}
+
+Cell.prototype.chain = function(){
+            for (let xoff = -1; xoff <= 1; xoff++) {
             for (let yoff = -1; yoff <= 1; yoff++) {
                 let i = this.i + xoff;
                 let j = this.j + yoff;
@@ -53,11 +82,7 @@ Cell.prototype.reveals = function () {
                 }
             }
         }
-    } else if (this.crab) {
-        lose();
-    }
 }
-
 
 Cell.prototype.click = function (x, y) {
     return (x > this.x && x < this.x + this.l && y > this.y && y < this.y + this.l);
@@ -65,7 +90,7 @@ Cell.prototype.click = function (x, y) {
 
 Cell.prototype.countCrabs = function () {
     if (this.crab) {
-        return -1;
+        return;
     }
     let crabs = 0;
     for (let xoff = -1; xoff <= 1; xoff++) {
@@ -81,4 +106,19 @@ Cell.prototype.countCrabs = function () {
         }
     }
     this.amtCrabs = crabs;
+}
+
+Cell.prototype.flag = function(){
+    print('works');
+    if(!this.reveal && !this.flagged && flagger.on){
+        this.flagged = true;
+    }
+    else if(this.flagged && flagger.on){
+        this.flagged = false;
+    }
+    else{
+        this.reveals();
+    }
+    print(!this.reveal && !this.flagged && flagger.on);
+    print(this.flagged);
 }
