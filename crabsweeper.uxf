@@ -4,51 +4,52 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>50</y>
+      <x>660</x>
+      <y>40</y>
       <w>150</w>
-      <h>140</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>Page
 --
 -name: String
--grid: array
+
 --
-populateGrid()
-displayHUD()
-navigate()</panel_attributes>
+navigate()
+displayInfo()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>300</y>
+      <x>380</x>
+      <y>330</y>
       <w>150</w>
-      <h>210</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>Cell
 --
 -gridI: int
 -gridJ: int
--x: int
--y: int
--stateR: bool
--stateB: bool
+-xLocation: int
+-yLocation: int
+-stateRev: bool
+-stateBom: bool
+-stateFla:bool
 -amtBombs: int
 --
 displayCell()
 reveal()
 choose()
-countCrabs()
-</panel_attributes>
+countBombs()
+chain()
+flag()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>300</y>
+      <x>720</x>
+      <y>330</y>
       <w>150</w>
       <h>210</h>
     </coordinates>
@@ -63,8 +64,8 @@ endGame()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>260</x>
-      <y>400</y>
+      <x>520</x>
+      <y>430</y>
       <w>220</w>
       <h>30</h>
     </coordinates>
@@ -74,15 +75,82 @@ endGame()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
-      <y>180</y>
+      <x>450</x>
+      <y>240</y>
       <w>80</w>
-      <h>140</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1..1
 m2=0..*
 displays</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>40</y>
+      <w>150</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+-grid: array
+-gg: bool
+-start:bool
+-score: int
+-gridSize: int
+--
+populateGrid()
+displayHUD()
+win()
+lose()
+placebombs()
+countTime()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>190</y>
+      <w>150</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Flagger
+--
+-xLocation: int
+-yLocation: int
+-state: bool
+--
+-onOff()
+-displaySelf()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>350</y>
+      <w>190</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..*
+m2=1..1
+changes stateFla &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;170.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>110</y>
+      <w>160</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
