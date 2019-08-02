@@ -50,6 +50,7 @@ function setup() {
             }
         }
     }
+    crabcrab = [crabcrab1, crabcrab2, crabcrab3, crabcrab4];
     cols = 10; //floor(width / l);
     rows = 10; //floor(height / l);
     grid = makeField(cols, rows);

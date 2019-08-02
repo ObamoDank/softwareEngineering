@@ -3,13 +3,16 @@ let treetree;
 let wavewave;
 
 function preload() {
-    crabcrab = loadImage('crab.png');
-    treetree = loadImage('tree.png');
-    wavewave = loadImage('wave.png');
+    crabcrab1 = loadImage('crab.png');
+    crabcrab2 = loadImage('crab2.png');
+    crabcrab3 = loadImage('crab3.png');
+    crabcrab4 = loadImage('crab4.png');
+    treetree = loadImage('tree2.png');
+    wavewave = loadImage('wave2.png');
 }
 
 function Cell(i, j, l) {
-    this.img = crabcrab;
+    this.crabs = crabcrab[floor(random(4))];
     this.tree = treetree;
     this.wave = wavewave;
     this.i = i;
@@ -39,7 +42,7 @@ Cell.prototype.show = function () {
         if (this.crab) {
             fill('#3fe0d0');
             rect(this.x, this.y, this.l, this.l);
-            image(this.img, this.x, this.y, this.l, this.l);
+            image(this.crabs, this.x, this.y, this.l, this.l);
         } else {
             fill('#3fe0d0');
             rect(this.x, this.y, this.l, this.l);
