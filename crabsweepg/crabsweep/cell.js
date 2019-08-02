@@ -29,7 +29,7 @@ Cell.prototype.show = function () {
     rect(this.x, this.y, this.l, this.l);
     image(this.wave, this.x, this.y, this.l, this.l);
 
-    if (this.flagged){
+    if (this.flagged) {
         fill('#1034a6');
         rect(this.x, this.y, this.l, this.l);
         image(this.tree, this.x, this.y, this.l, this.l);
@@ -54,34 +54,34 @@ Cell.prototype.show = function () {
 }
 
 Cell.prototype.reveals = function () {
-    if(!gg){
-                if (!this.reveal){
+    if (!gg) {
+        if (!this.reveal) {
             revealCount++;
         }
         this.reveal = true;
-    if (this.amtCrabs == 0) {
-        this.chain();
-    } else if (this.crab) {
-        lose();
-    } else if (revealCount + allCrabs == 100){
-        win();
-    }
+        if (this.amtCrabs == 0) {
+            this.chain();
+        } else if (this.crab) {
+            lose();
+        } else if (revealCount + allCrabs == 100) {
+            win();
+        }
     }
 }
 
-Cell.prototype.chain = function(){
-            for (let xoff = -1; xoff <= 1; xoff++) {
-            for (let yoff = -1; yoff <= 1; yoff++) {
-                let i = this.i + xoff;
-                let j = this.j + yoff;
-                if ((i > -1 && i < cols && j > -1 && j < rows)) {
-                    let neigh = grid[i][j];
-                    if (neigh.reveal == false) {
-                        neigh.reveals();
-                    }
+Cell.prototype.chain = function () {
+    for (let xoff = -1; xoff <= 1; xoff++) {
+        for (let yoff = -1; yoff <= 1; yoff++) {
+            let i = this.i + xoff;
+            let j = this.j + yoff;
+            if ((i > -1 && i < cols && j > -1 && j < rows)) {
+                let neigh = grid[i][j];
+                if (neigh.reveal == false) {
+                    neigh.reveals();
                 }
             }
         }
+    }
 }
 
 Cell.prototype.click = function (x, y) {
@@ -108,15 +108,13 @@ Cell.prototype.countCrabs = function () {
     this.amtCrabs = crabs;
 }
 
-Cell.prototype.flag = function(){
+Cell.prototype.flag = function () {
     print('works');
-    if(!this.reveal && !this.flagged && flagger.on){
+    if (!this.reveal && !this.flagged && flagger.on) {
         this.flagged = true;
-    }
-    else if(this.flagged && flagger.on){
+    } else if (this.flagged && flagger.on) {
         this.flagged = false;
-    }
-    else{
+    } else {
         this.reveals();
     }
     print(!this.reveal && !this.flagged && flagger.on);

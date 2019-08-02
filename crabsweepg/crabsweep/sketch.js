@@ -19,37 +19,37 @@ let revealCount = 0;
 let gridSize = 0;
 
 function setup() {
-    flagger = {
-    img : treetree,
-    x: 90,
-    y: 40,
-    l: 50,
-    on: false,
-    turnOn: function(){
-    if(this.on){
-    this.on = false;
-    }else{
-        this.on = true;
-    }
-},
-    show: function(){
-    imageMode(CENTER);
-    if (!flagger.on){
-    image(flagger.img, flagger.x, flagger.y, flagger.l, flagger.l);
-    }else{
-    ellipse(flagger.x, flagger.y, flagger.l + 20);
-    image(flagger.img, flagger.x, flagger.y, flagger.l, flagger.l);
-    }
-    imageMode(CORNER);
-    },
-    click: function(){
-        if(mouseX > flagger.x - flagger.l / 2 && mouseX < flagger.x + flagger.l / 2 && mouseY > flagger.y - flagger.l / 2 && mouseY < flagger.y + flagger.l / 2){
-        flagger.turnOn();
-        print (flagger.on);
-    }
-    }
-    }
     createCanvas(541, 601);
+    flagger = {
+        img: treetree,
+        x: 90,
+        y: 40,
+        l: 50,
+        on: false,
+        turnOn: function () {
+            if (this.on) {
+                this.on = false;
+            } else {
+                this.on = true;
+            }
+        },
+        show: function () {
+            imageMode(CENTER);
+            if (!flagger.on) {
+                image(flagger.img, flagger.x, flagger.y, flagger.l, flagger.l);
+            } else {
+                ellipse(flagger.x, flagger.y, flagger.l + 20);
+                image(flagger.img, flagger.x, flagger.y, flagger.l, flagger.l);
+            }
+            imageMode(CORNER);
+        },
+        click: function () {
+            if (mouseX > flagger.x - flagger.l / 2 && mouseX < flagger.x + flagger.l / 2 && mouseY > flagger.y - flagger.l / 2 && mouseY < flagger.y + flagger.l / 2) {
+                flagger.turnOn();
+                print(flagger.on);
+            }
+        }
+    }
     cols = 10; //floor(width / l);
     rows = 10; //floor(height / l);
     grid = makeField(cols, rows);
@@ -57,7 +57,7 @@ function setup() {
         for (let j = 0; j < rows; j++) {
             gridSize++;
             grid[i][j] = new Cell(i, j, l);
-            
+
         }
     }
 
@@ -86,7 +86,7 @@ function setup() {
 }
 
 
-function mouseClicked() {  
+function mouseClicked() {
     start = true;
     flagger.click();
     for (let i = 0; i < cols; i++) {
@@ -106,8 +106,8 @@ function lose() {
                 cc.reveal = true;
             }
         }
-    gg = true;
-    score = 'You Lose';
+        gg = true;
+        score = 'You Lose';
     }
 }
 
@@ -127,27 +127,27 @@ function draw() {
     }
 }
 
-function countTime(){
-    if (!gg && start){
-    if (frameCount % 60 == 0){
-        score++;
-    }
+function countTime() {
+    if (!gg && start) {
+        if (frameCount % 60 == 0) {
+            score++;
+        }
     }
 }
 
-function displayTimer(){
+function displayTimer() {
     countTime();
     textSize(20);
     textAlign(CENTER);
     fill('orange');
-    text('Score: ' + score, width/2, 50);
+    text('Score: ' + score, width / 2, 50);
 }
 
-function drawBackground(){
+function drawBackground() {
     background('#111E6C');
     rectMode(CENTER);
     noStroke();
     fill('#000080');
-    rect(width/2, height/2 + 35, 520, 520);
+    rect(width / 2, height / 2 + 35, 520, 520);
     rectMode(CORNER);
 }
