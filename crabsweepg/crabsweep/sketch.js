@@ -38,6 +38,7 @@ function setup() {
             if (!flagger.on) {
                 image(flagger.img, flagger.x, flagger.y, flagger.l, flagger.l);
             } else {
+                fill('#008e54');
                 ellipse(flagger.x, flagger.y, flagger.l + 20);
                 image(flagger.img, flagger.x, flagger.y, flagger.l, flagger.l);
             }
@@ -50,7 +51,6 @@ function setup() {
             }
         }
     }
-    crabcrab = [crabcrab1, crabcrab2, crabcrab3, crabcrab4];
     cols = 10; //floor(width / l);
     rows = 10; //floor(height / l);
     grid = makeField(cols, rows);
@@ -83,7 +83,6 @@ function setup() {
             grid[i][j].countCrabs();
         }
     }
-    print(gridSize);
 }
 
 
