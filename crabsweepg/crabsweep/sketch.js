@@ -11,7 +11,7 @@ let cols;
 let rows;
 let l = 50;
 let grid;
-let allCrabs = 10;
+let allCrabs = 20;
 let gg = false;
 let score = 0;
 let start = false;
