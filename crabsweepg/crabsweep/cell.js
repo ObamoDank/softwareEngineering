@@ -115,8 +115,8 @@ Cell.prototype.flag = function () {
     } else if (this.flagged && flagger.on) {
         this.flagged = false;
     } else {
-        this.reveals();
+        if (!this.flagged) {
+            this.reveals();
+        }
     }
-    print(!this.reveal && !this.flagged && flagger.on);
-    print(this.flagged);
 }

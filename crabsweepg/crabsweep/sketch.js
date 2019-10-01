@@ -11,7 +11,7 @@ let cols;
 let rows;
 let l = 50;
 let grid;
-let allCrabs = 10;
+let allCrabs = 20;
 let gg = false;
 let score = 0;
 let start = false;
@@ -20,37 +20,7 @@ let gridSize = 0;
 
 function setup() {
     createCanvas(541, 601);
-    flagger = {
-        img: treetree,
-        x: 90,
-        y: 40,
-        l: 50,
-        on: false,
-        turnOn: function () {
-            if (this.on) {
-                this.on = false;
-            } else {
-                this.on = true;
-            }
-        },
-        show: function () {
-            imageMode(CENTER);
-            if (!flagger.on) {
-                image(flagger.img, flagger.x, flagger.y, flagger.l, flagger.l);
-            } else {
-                fill('#008e54');
-                ellipse(flagger.x, flagger.y, flagger.l + 20);
-                image(flagger.img, flagger.x, flagger.y, flagger.l, flagger.l);
-            }
-            imageMode(CORNER);
-        },
-        click: function () {
-            if (mouseX > flagger.x - flagger.l / 2 && mouseX < flagger.x + flagger.l / 2 && mouseY > flagger.y - flagger.l / 2 && mouseY < flagger.y + flagger.l / 2) {
-                flagger.turnOn();
-                print(flagger.on);
-            }
-        }
-    }
+    flagger = new Flagger(90, 40, 50, treetree)
     cols = 10; //floor(width / l);
     rows = 10; //floor(height / l);
     grid = makeField(cols, rows);
