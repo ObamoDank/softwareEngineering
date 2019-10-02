@@ -1,7 +1,7 @@
 function Cell(i, j, l) {
-    this.crabs = crabcrab;
-    this.tree = treetree;
-    this.wave = wavewave;
+    this.crabs = crab;
+    this.tree = tree;
+    this.wave = wave;
     this.i = i;
     this.j = j;
     this.x = (i * l) + 20;

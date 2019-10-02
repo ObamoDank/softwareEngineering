@@ -1,5 +1,6 @@
-let crabcrab;
-let treetree;
-let wavewave;
-let honeyhoney;
-let beebee;
+let crab;
+let tree;
+let wave;
+let honey;
+let bee;
+let drop;

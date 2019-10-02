@@ -1,6 +1,7 @@
 function Hex(i, j, l, shift) {
-    this.pot = potpot;
-    this.bee = beebee;
+    this.pot = pot;
+    this.bee = bee;
+    this.drop = drop
     this.i = i;
     this.j = j;
     this.shift = shift;
@@ -24,9 +25,9 @@ Hex.prototype.show = function () {
     stroke('#fbd604');
 
     hexagon(this.x, this.y);
-
-    //        image(this.wave, this.x, this.y, this.l, this.l);
-
+    if (!this.flagged) {
+        image(this.drop, this.x - 3, this.y - 4, this.l / 2 + 5, this.l + 5);
+    }
     if (this.flagged) {
         fill('#1034a6');
         image(this.pot, this.x - 3, this.y, this.l, this.l);
@@ -70,9 +71,6 @@ Hex.prototype.reveals = function () {
             hexGame.win();
         }
     }
-//    console.log(hexGame.revealCount)
-//    console.log(hexGame.allBombs)
-//    console.log(hexGame.gridSize)
 }
 
 Hex.prototype.flag = function () {

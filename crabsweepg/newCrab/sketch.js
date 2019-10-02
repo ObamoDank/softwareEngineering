@@ -1,33 +1,47 @@
 function preload() {
-    crabcrab = loadImage('crab.png');
-    treetree = loadImage('tree2.png');
-    wavewave = loadImage('wave2.png');
-    honeyhoney = loadImage('honey.png');
-    potpot = loadImage('pot.png');
-    beebee = loadImage('bee.png');
+    crab = loadImage('img/crab3.png');
+    tree = loadImage('img/tree2.png');
+    wave = loadImage('img/wave2.png');
+    honey = loadImage('img/honey.png');
+    pot = loadImage('img/pot.png');
+    bee = loadImage('img/bee.png');
+    drop = loadImage('img/drop.png');
 }
 let flagger;
 let game;
+let buttons = [];
 
 function setup() {
     createCanvas(541, 601);
-    currentScreen = hexScreen;
-    flagger = new Flagger(90, 40, 50, potpot, color('rgba(252,180,58, 0.8)'));
+    currentScreen = langingScreen;
+    flagger = new Flagger(90, 40, 50, tree, color('rgba(252,180,58, 0.8)'));
     standard = new Game(10, 15);
-    hexGame = new Game(12, 20);
+    hexGame = new Game(12, 15);
     standard.makeField();
     standard.populateGrid(Cell);
     standard.plantBombs();
     hexGame.makeField();
     hexGame.populateGrid(Hex);
     hexGame.plantBombs();
+    
+    resetButton = new Button();
+    menuButton = new Button();
+//    standardButton = new Button();
+//    hexButton = new Button();
+//    colourButton = new Button();
+//    instructionsButton = new Button();
+    
+    
 }
 
 function draw() {
-    //    if (currentScreen = standardScreen) {
-    //        drawStandardGame();
-    //    }
-    if (currentScreen = hexScreen) {
+    if(currentScreen == landingScreen){
+        drawLanding();
+    }
+    if (currentScreen == standardScreen) {
+        drawStandardGame();
+    }
+    if (currentScreen == hexScreen) {
         drawHexGame();
     }
 }
