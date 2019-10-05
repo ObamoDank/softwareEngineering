@@ -1,5 +1,4 @@
-function Flagger(x, y, l, pic) {
-    this.img = pic;
+function Flagger(x, y, l) {
     this.x = x;
     this.y = y;
     this.l = l;
@@ -15,18 +14,19 @@ Flagger.prototype.turnOn = function() {
 }
 
 Flagger.prototype.show = function() {
-    imageMode(CENTER);
+    rectMode(CENTER);
     if (!this.on) {
-        image(this.img, this.x, this.y, this.l, this.l);
+        rect(this.x, this.y, this.l, this.l);
     } else {
         fill('#008e54');
         ellipse(this.x, this.y, this.l + 20);
-        image(this.img, this.x, this.y, this.l, this.l);
+        rect(this.x, this.y, this.l, this.l);
     }
-    imageMode(CORNER);
+    rectMode(CORNER);
 }
 
 Flagger.prototype.click = function() {
+    console.log(this.x - this.l / 2);
     if (mouseX > this.x - this.l / 2 && mouseX < this.x + this.l / 2 && mouseY > this.y - this.l / 2 && mouseY < this.y + this.l / 2) {
         this.turnOn();
         print("Flagger on: " + this.on);

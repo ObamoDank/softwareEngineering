@@ -9,9 +9,10 @@ function makeField(cols, rows) {
 let flagger;
 let cols;
 let rows;
-let l = 50;
+let l = 20;
 let grid;
-let allCrabs = 20;
+let allBees = 10;
+let xShift = false;
 let gg = false;
 let score = 0;
 let start = false;
@@ -20,15 +21,21 @@ let gridSize = 0;
 
 function setup() {
     createCanvas(541, 601);
-    flagger = new Flagger(90, 40, 50, treetree)
-    cols = 10; //floor(width / l);
-    rows = 10; //floor(height / l);
+    flagger = new Flagger(50, 50, 50);
+    cols = 12;
+    rows = 12;
     grid = makeField(cols, rows);
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
-            gridSize++;
-            grid[i][j] = new Cell(i, j, l);
+            if (!xShift) {
+                grid[j][i] = new Hex(j, i, l, xShift);
+            } else {
+                grid[j][i] = new Hex(j, i, l, xShift);
 
+            }
+            xShift = !xShift;
+            gridSize++;
+            console.log(gridSize);
         }
     }
 
@@ -39,31 +46,18 @@ function setup() {
         }
     }
 
-    for (var n = 0; n < allCrabs; n++) {
+    for (var n = 0; n < allBees; n++) {
         let index = floor(random(options.length));
         let choice = options[index];
         let i = choice[0];
         let j = choice[1];
         options.splice(index, 1);
-        grid[i][j].crab = true;
+        grid[i][j].bee = true;
     }
 
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < cols; j++) {
-            grid[i][j].countCrabs();
-        }
-    }
-}
-
-
-function mouseClicked() {
-    start = true;
-    flagger.click();
-    for (let i = 0; i < cols; i++) {
-        for (let j = 0; j < rows; j++) {
-            if (grid[i][j].click(mouseX, mouseY)) {
-                grid[i][j].flag();
-            }
+            grid[i][j].countBees(cols);
         }
     }
 }
@@ -72,7 +66,7 @@ function lose() {
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
             let cc = grid[i][j];
-            if (cc.reveal == false && cc.crab) {
+            if (cc.reveal == false && cc.bee) {
                 cc.reveal = true;
             }
         }
@@ -93,6 +87,33 @@ function draw() {
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
             grid[i][j].show();
+        }
+    }
+}
+
+function hexagon(x, y) {
+    beginShape();
+    vertex(-2.45 + x, 20 + y);
+    vertex(15.32 + x, 10 + y);
+    vertex(15.32 + x, -10 + y);
+    vertex(-2.45 + x, -20 + y);
+    vertex(-19.5 + x, -10 + y);
+    vertex(-19.5 + x, 10 + y);
+    vertex(-2.45 + x, 20 + y);
+    endShape(CLOSE);
+}
+
+
+
+function mouseClicked() {
+    start = true;
+    flagger.click();
+    for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+            if (grid[i][j].click(mouseX, mouseY)) {
+                console.log([grid[i][j].i, grid[i][j].j])
+                grid[i][j].flag();
+            }
         }
     }
 }

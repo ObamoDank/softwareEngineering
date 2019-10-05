@@ -1,0 +1,14 @@
+let crab;
+let tree;
+let wave;
+let honey;
+let bee;
+let drop;
+let galaxy;
+let sun;
+let water;
+let fire;
+let wind;
+let heart;
+let eart;
+let hole;

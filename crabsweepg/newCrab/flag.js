@@ -1,8 +1,9 @@
-function Flagger(x, y, l, pic) {
+function Flagger(x, y, l, pic, col) {
     this.img = pic;
     this.x = x;
     this.y = y;
     this.l = l;
+    this.col = col;
     this.on = false;
 }
 
@@ -19,7 +20,7 @@ Flagger.prototype.show = function() {
     if (!this.on) {
         image(this.img, this.x, this.y, this.l, this.l);
     } else {
-        fill('#008e54');
+        fill(this.col);
         ellipse(this.x, this.y, this.l + 20);
         image(this.img, this.x, this.y, this.l, this.l);
     }

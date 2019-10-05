@@ -1,26 +1,16 @@
-let crabcrab;
-let treetree;
-let wavewave;
-
-function preload() {
-    crabcrab = loadImage('crab.png');
-    treetree = loadImage('tree2.png');
-    wavewave = loadImage('wave2.png');
-}
-
 function Cell(i, j, l) {
-    this.crabs = crabcrab;
-    this.tree = treetree;
-    this.wave = wavewave;
+    this.crabs = crab;
+    this.tree = tree;
+    this.wave = wave;
     this.i = i;
     this.j = j;
     this.x = (i * l) + 20;
     this.y = (j * l) + 90;
     this.l = l;
-    this.crab = false
+    this.bomb = false
     this.reveal = false;
     this.flagged = false;
-    this.amtCrabs;
+    this.amtBombs;
 }
 
 Cell.prototype.show = function () {
@@ -36,7 +26,7 @@ Cell.prototype.show = function () {
 
     }
     if (this.reveal) {
-        if (this.crab) {
+        if (this.bomb) {
             fill('#008ecc');
             rect(this.x, this.y, this.l, this.l);
             image(this.crabs, this.x, this.y, this.l, this.l);
@@ -46,25 +36,25 @@ Cell.prototype.show = function () {
             fill('orange')
             textAlign(CENTER);
             textSize(28);
-            if (this.amtCrabs > 0) {
-                text(this.amtCrabs, this.x + this.l / 2, this.y + this.l / 2 + 10);
+            if (this.amtBombs > 0) {
+                text(this.amtBombs, this.x + this.l / 2, this.y + this.l / 2 + 10);
             }
         }
     }
 }
 
 Cell.prototype.reveals = function () {
-    if (!gg) {
+    if (!standard.gg) {
         if (!this.reveal) {
-            revealCount++;
+            standard.revealCount++;
         }
         this.reveal = true;
-        if (this.amtCrabs == 0) {
+        if (this.amtBombs == 0) {
             this.chain();
-        } else if (this.crab) {
-            lose();
-        } else if (revealCount + allCrabs == 100) {
-            win();
+        } else if (this.bomb) {
+            standard.lose();
+        } else if (standard.revealCount + standard.allBombs == 100) {
+            standard.win();
         }
     }
 }
@@ -74,8 +64,8 @@ Cell.prototype.chain = function () {
         for (let yoff = -1; yoff <= 1; yoff++) {
             let i = this.i + xoff;
             let j = this.j + yoff;
-            if ((i > -1 && i < cols && j > -1 && j < rows)) {
-                let neigh = grid[i][j];
+            if ((i > -1 && i < standard.dimensions && j > -1 && j < standard.dimensions)) {
+                let neigh = standard.grid[i][j];
                 if (neigh.reveal == false) {
                     neigh.reveals();
                 }
@@ -88,28 +78,27 @@ Cell.prototype.click = function (x, y) {
     return (x > this.x && x < this.x + this.l && y > this.y && y < this.y + this.l);
 }
 
-Cell.prototype.countCrabs = function () {
-    if (this.crab) {
+Cell.prototype.countBombs = function () {
+    if (this.bomb) {
         return;
     }
-    let crabs = 0;
+    let bombs = 0;
     for (let xoff = -1; xoff <= 1; xoff++) {
         for (let yoff = -1; yoff <= 1; yoff++) {
             let i = this.i + xoff;
             let j = this.j + yoff;
-            if (i > -1 && i < cols && j > -1 && j < rows) {
-                let neigh = grid[i][j];
-                if (neigh.crab) {
-                    crabs++
+            if (i > -1 && i < standard.dimensions && j > -1 && j < standard.dimensions) {
+                let neigh = standard.grid[i][j];
+                if (neigh.bomb) {
+                    bombs++
                 }
             }
         }
     }
-    this.amtCrabs = crabs;
+    this.amtBombs = bombs;
 }
 
 Cell.prototype.flag = function () {
-    print('works');
     if (!this.reveal && !this.flagged && flagger.on) {
         this.flagged = true;
     } else if (this.flagged && flagger.on) {
