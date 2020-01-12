@@ -1,0 +1,26 @@
+For items.xlsx
+
+asin: product ASIN
+brand: product brand
+title: product title
+url: product URL
+image: product image URL
+rating: product average rating
+reviewUrl: product review page URL
+totalReviews: product total reviews
+prices: product prices
+
+
+For reviews.xlsx
+	
+asin: product ASIN
+name: reviewer name
+rating: reviewer rating (scale 1 to 5)
+date: review date
+verified: valid customer
+title: review title
+body: review content
+helpfulVotes: helpful feedbacks
+
+
+
